@@ -1,27 +1,137 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora IMC</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control de Estatus Mensual</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Calculadora de IMC</h1>
-        <form id="imcForm">
-            <label for="peso">Peso (kg):</label>
-            <input type="number" id="peso" required step="0.1">
+  <main class="app">
+    <header class="app-header">
+      <h1>Estatus de Ventas e Insumos</h1>
+      <p>Panel simple inspirado en tu hoja de cálculo para registrar ventas, compras y consolidado.</p>
+    </header>
 
-            <label for="altura">Altura (m):</label>
-            <input type="number" id="altura" required step="0.01">
-
-            <button type="submit">Calcular IMC</button>
+    <section class="grid">
+      <article class="card">
+        <h2>Ventas del día</h2>
+        <form id="ventaForm" class="form-grid">
+          <input id="fechaVenta" type="date" required />
+          <input id="montoVenta" type="number" min="0" step="100" placeholder="Venta ($)" required />
+          <input id="cantidadVenta" type="number" min="0" step="1" placeholder="Cantidad" required />
+          <input id="carneVenta" type="number" min="0" step="1" placeholder="Carne" required />
+          <input id="cebollaVenta" type="number" min="0" step="1" placeholder="Cebolla" required />
+          <input id="papasVenta" type="number" min="0" step="1" placeholder="Papas" required />
+          <input id="maizVenta" type="number" min="0" step="1" placeholder="Maíz" required />
+          <input id="domiVenta" type="number" min="0" step="1" placeholder="Domi" required />
+          <button type="submit">Agregar venta</button>
         </form>
-        
 
-    </div>
+        <div class="table-wrap">
+          <table id="tablaVentas">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Venta</th>
+                <th>Cantidad</th>
+                <th>Carne</th>
+                <th>Cebolla</th>
+                <th>Papas</th>
+                <th>Maíz</th>
+                <th>Domi</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+              <tr>
+                <th>Total</th>
+                <th id="totalVentas">$0</th>
+                <th id="totalCantidad">0</th>
+                <th id="totalCarne">0</th>
+                <th id="totalCebolla">0</th>
+                <th id="totalPapas">0</th>
+                <th id="totalMaiz">0</th>
+                <th id="totalDomi">0</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </article>
 
-    <script src="script.js"></script>
+      <article class="card">
+        <h2>Compras</h2>
+        <form id="compraForm" class="form-grid compact">
+          <input id="fechaCompra" type="date" required />
+          <input id="motivoCompra" type="text" placeholder="Motivo" required />
+          <input id="montoCompra" type="number" min="0" step="100" placeholder="Total compra" required />
+          <button type="submit">Agregar compra</button>
+        </form>
+
+        <div class="table-wrap">
+          <table id="tablaCompras">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Motivo</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+              <tr>
+                <th colspan="2">Total</th>
+                <th id="totalCompras">$0</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Insumos (meta mensual)</h2>
+        <form id="metaForm" class="form-grid compact">
+          <input id="metaCarne" type="number" min="0" step="1000" placeholder="Meta carne" required />
+          <input id="metaCebolla" type="number" min="0" step="1000" placeholder="Meta cebolla" required />
+          <input id="metaPapas" type="number" min="0" step="1000" placeholder="Meta papas" required />
+          <input id="metaMaiz" type="number" min="0" step="1000" placeholder="Meta maíz" required />
+          <input id="metaDomi" type="number" min="0" step="1000" placeholder="Meta domi" required />
+          <button type="submit">Guardar meta</button>
+        </form>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Insumo</th>
+                <th>Meta</th>
+                <th>Consumido (unid.)</th>
+              </tr>
+            </thead>
+            <tbody id="tablaInsumosBody"></tbody>
+            <tfoot>
+              <tr>
+                <th colspan="2">Total metas</th>
+                <th id="totalMetaInsumos">$0</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </article>
+
+      <article class="card highlight">
+        <h2>Consolidado</h2>
+        <ul class="summary-list">
+          <li><span>Ventas totales</span><strong id="resVentas">$0</strong></li>
+          <li><span>Compras totales</span><strong id="resCompras">$0</strong></li>
+          <li><span>Balance</span><strong id="resBalance">$0</strong></li>
+          <li><span>Costo meta insumos</span><strong id="resMeta">$0</strong></li>
+          <li><span>Balance después de metas</span><strong id="resFinal">$0</strong></li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
